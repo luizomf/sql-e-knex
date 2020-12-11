@@ -1,0 +1,19 @@
+{
+  "name": "sql-e-knex",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com-luizomf:luizomf/sql-e-knex.git"
+  },
+  "author": {
+    "name": "Luiz Otávio",
+    "email": "luizomf@gmail.com",
+    "url": "https://linktr.ee/otaviomiranda"
+  },
+  "license": "ISC"
+}
