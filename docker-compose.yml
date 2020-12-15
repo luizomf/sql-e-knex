@@ -9,6 +9,8 @@ services:
       - --default-authentication-plugin=mysql_native_password
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
+      - --innodb_force_recovery=0
+      - --default_time_zone=America/Sao_Paulo
     volumes: 
       - ~/.MySQLDBData/mysqlonly/mysql_cursos:/var/lib/mysql
     ports:
