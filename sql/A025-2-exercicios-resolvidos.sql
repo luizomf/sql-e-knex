@@ -1,63 +1,92 @@
 -- 1) Insira 5 usuários
-insert into users (first_name, last_name, email, password_hash) values
-('João', 'Miranda', 'email1@email.com', rand() * 100000),
-('Maria', 'Figueiredo', 'email2@email.com', rand() * 100000);
+INSERT INTO users (first_name, last_name, email, password_hash) VALUES
+('Maria', 'Miranda', 'email1@a.com', round(rand()  * 100000)),
+('João', 'Figueiredo', 'email2@a.com', round(rand()  * 100000)),
+('Pablo', 'V.', 'email3@a.com', round(rand()  * 100000)),
+('Belchior', 'Moreira', 'email4@a.com', round(rand()  * 100000)),
+('Elis', 'Regina', 'email5@a.com', round(rand()  * 100000));
+
+UPDATE users set salary = round(rand()  * 100000, 2) WHERE id IN 
+(624, 623, 622, 621, 620, 618);
 
 -- 2) Insira 5 perfís para os usuários inseridos
-insert into profiles (bio, description, user_id) values 
-('Uma bio', 'Uma description', (select id from users where email = 'email1@email.com')),
-('Uma bio', 'Uma description', (select id from users where email = 'email2@email.com'));
+INSERT INTO profiles (bio, description, user_id) VALUES
+('Uma bio', 'Uma description', (select id from users where email = 'email1@a.com')),
+('Uma bio', 'Uma description', (select id from users where email = 'email2@a.com')),
+('Uma bio', 'Uma description', (select id from users where email = 'email3@a.com')),
+('Uma bio', 'Uma description', (select id from users where email = 'email4@a.com')),
+('Uma bio', 'Uma description', (select id from users where email = 'email5@a.com'));
 
 -- 3) Insira permissões (roles) para os usuários inseridos
-insert ignore into users_roles (user_id, role_id) values 
+insert into users_roles (user_id, role_id) values 
 (
-	(select id from users where email = 'email1@email.com'),
+	(select id from users where email = 'email1@a.com'),
 	(select id from roles where name = 'PUT')
 ),
 (
-	(select id from users where email = 'email2@email.com'),
+	(select id from users where email = 'email2@a.com'),
+	(select id from roles where name = 'PUT')
+),
+(
+	(select id from users where email = 'email3@a.com'),
+	(select id from roles where name = 'PUT')
+),
+(
+	(select id from users where email = 'email4@a.com'),
+	(select id from roles where name = 'PUT')
+),
+(
+	(select id from users where email = 'email5@a.com'),
+	(select id from roles where name = 'PUT')
+),
+(
+	(select id from users where email = 'email5@a.com'),
 	(select id from roles where name = 'POST')
 ),
 (
-	(select id from users where email = 'email2@email.com'),
-	(select id from roles where name = 'PUT')
+	(select id from users where email = 'email5@a.com'),
+	(select id from roles where name = 'GET')
 );
 
 -- 4) Selecione os últimos 5 usuários por ordem decrescente
-select * from users order by id desc limit 5;
+SELECT * FROM users ORDER BY id DESC LIMIT 5;
 
 -- 5) Atualize o último usuário inserido
-update users set first_name = concat(first_name, ' atualizado')
-where id = 619;
+UPDATE users set first_name='Elis Regina', last_name='Atualizada' WHERE id = 624;
 
 -- 6) Remova uma permissão de algum usuário
-delete from users_roles where 
-user_id=(select id from users where email = 'email2@email.com') and
-role_id=(select id from roles where name = 'POST');
+delete 
+-- select *
+from users_roles where
+user_id = (select id from users where email = 'email5@a.com') AND 
+role_id = (select id from roles where name='POST');
 
 -- 7) Remova um usuário que tem a permissão "PUT"
-delete u from users as u
+-- SELECT u.id as uid, u.first_name, r.name
+delete u
+from users u
 inner join users_roles ur on u.id = ur.user_id 
 inner join roles r on ur.role_id = r.id
-where r.name = 'PUT' and u.id = 619;
+where r.name  = 'PUT' and u.id = 624;
 
 -- 8) Selecione usuários com perfís e permissões (obrigatório)
-select u.id as uid, u.first_name, r.name, p.bio from users u
-inner join profiles p on p.user_id = u.id
+SELECT u.id as uid, u.first_name, r.name, p.bio 
+from users u
 inner join users_roles ur on u.id = ur.user_id 
 inner join roles r on ur.role_id = r.id
-order by u.first_name asc;
+inner join profiles p on p.user_id = u.id;
 
 -- 9) Selecione usuários com perfís e permissões (opcional)
-select u.id as uid, u.first_name, r.name, p.bio from users u
-left join profiles p on p.user_id = u.id
+SELECT u.id as uid, u.first_name, r.name, p.bio 
+from users u
 left join users_roles ur on u.id = ur.user_id 
 left join roles r on ur.role_id = r.id
-order by u.first_name asc;
+left join profiles p on p.user_id = u.id;
 
 -- 10) Selecione usuários com perfís e permissões ordenando por salário
-select u.id as uid, u.first_name, u.salary , r.name, p.bio from users u
-left join profiles p on p.user_id = u.id
+SELECT u.id as uid, u.first_name, r.name, p.bio, u.salary 
+from users u
 left join users_roles ur on u.id = ur.user_id 
 left join roles r on ur.role_id = r.id
-order by u.salary DESC ;
+left join profiles p on p.user_id = u.id
+order by u.salary ASC;
