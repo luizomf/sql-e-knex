@@ -1,8 +1,8 @@
 version: "3"
 services: 
-  mysql_cursos:
-    container_name: mysql_cursos
-    hostname: mysql_cursos
+  mysql_knex:
+    container_name: mysql_knex
+    hostname: mysql_knex
     image: mysql
     restart: always
     command:
@@ -10,9 +10,8 @@ services:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
       - --innodb_force_recovery=0
-      - --default_time_zone=America/Sao_Paulo
     volumes: 
-      - ~/.MySQLDBData/mysqlonly/mysql_cursos:/var/lib/mysql
+      - ~/.MySQLDBData/mysqlonly/mysql_knex:/var/lib/mysql
     ports:
       - 3306:3306
     environment:
@@ -20,4 +19,4 @@ services:
       MYSQL_DATABASE: base_de_dados
       MYSQL_USER: usuario
       MYSQL_PASSWORD: senha
-
+      TZ: America/Sao_Paulo
