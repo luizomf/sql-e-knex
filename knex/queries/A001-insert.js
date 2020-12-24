@@ -7,22 +7,32 @@ insert into users
 */
 const knex = require('../../knex/config/database');
 
-const insert = knex('users').insert([{
-  first_name: 'Joana',
-  last_name: 'B.',
-  email: 'email_2@email.com',
-  password_hash: '4_hash',
-  salary: 45885.59
-}, {
-  first_name: 'Rosana',
-  last_name: 'C.',
-  email: 'email_3@email.com',
-  password_hash: '5_hash',
-  salary: 1350.59
-},]).then(data => {
+const data = [
+  {
+    first_name: 'Joana',
+    last_name: 'B.',
+    email: '2@email.com',
+    password_hash: '4_hash',
+    salary: 12335.22 
+  },
+  {
+    first_name: 'Rosana',
+    last_name: 'C.',
+    email: '3@email.com',
+    password_hash: '5_hash',
+    salary: 6456.123 
+  },
+];
+
+const insert = knex('users').insert(data);
+
+console.log(insert.toString());
+console.log(insert.toSQL().toNative());
+
+insert.then(data => {
   console.log(data);
 }).catch(e => {
-  console.log('ERROR:', e.message);
+  console.log('ERRO:', e.message);
 }).finally(() => {
   knex.destroy();
-})
+});

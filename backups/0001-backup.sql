@@ -89,7 +89,7 @@ CREATE TABLE `profiles` (
 
 LOCK TABLES `profiles` WRITE;
 /*!40000 ALTER TABLE `profiles` DISABLE KEYS */;
-INSERT INTO `profiles` VALUES (1,'Bio de Luiz','Des de Luiz',NULL),(2,'Bio de Luiz','des de luiz',1),(3,'1	Bio de Luiz	Des de Luiz	','1	Bio de Luiz	Des de Luiz	',NULL);
+INSERT INTO `profiles` VALUES (1,'Bio de Luiz','Des de Luiz',NULL),(3,'1	Bio de Luiz	Des de Luiz	','1	Bio de Luiz	Des de Luiz	',NULL);
 /*!40000 ALTER TABLE `profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -137,7 +137,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`),
   UNIQUE KEY `users_password_hash_unique` (`password_hash`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -146,7 +146,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Luiz',NULL,'email@email.com','asdasdasd',200.00,'2020-12-22 17:26:29','2020-12-22 17:26:29'),(2,'Maria','q','email1@email.com','asdsda',100.00,'2020-12-23 03:14:31','2020-12-23 03:14:31');
+INSERT INTO `users` VALUES (10,'Helena','A.','1@email.com','3_hash',481.12,'2020-12-23 04:32:13','2020-12-23 04:32:13'),(11,'Joana','B.','2@email.com','4_hash',12335.22,'2020-12-23 04:34:07','2020-12-23 04:34:07'),(12,'Rosana','C.','3@email.com','5_hash',6456.12,'2020-12-23 04:34:07','2020-12-23 04:34:07');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -173,7 +173,6 @@ CREATE TABLE `users_roles` (
 
 LOCK TABLES `users_roles` WRITE;
 /*!40000 ALTER TABLE `users_roles` DISABLE KEYS */;
-INSERT INTO `users_roles` VALUES (1,1),(2,1),(1,2),(2,2);
 /*!40000 ALTER TABLE `users_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -186,4 +185,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-23  0:15:53
+-- Dump completed on 2020-12-23 21:00:41
